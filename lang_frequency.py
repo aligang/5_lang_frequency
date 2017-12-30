@@ -49,5 +49,7 @@ if __name__ == "__main__":
     else:
         text_from_file = load_data(textfile_path)
         most_frequent_words = get_most_frequent_words(text_from_file)
-        print("самые часто повторяющиеся слова в файле {}".format(textfile_path))
+        print(
+            "самые часто повторяющиеся слова в файле {}".format(textfile_path)
+        )
         get_pretty_output(most_frequent_words)
