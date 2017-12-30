@@ -1,7 +1,54 @@
-# Frequency Analysis of Words
+## 1.Что это такое ?
 
-[TODO. There will be project description]
+Этот код позволяет найти 10 самых повторяющихся слов в тексте
 
-# Project Goals
+## 2.Системные требования
+Для работы с программой понадобится Python3.5 (который скорее всего у вас уже установлен, если Вы используете Linux)  
 
-The code is written for educational purposes. Training course for web-developers - [DEVMAN.org](https://devman.org)
+
+## 3.Где можно скачать  
+Можно форкнуть здесь - [частота слов](https://github.com/aligang/5_lang_frequency)  
+и затем скачать 
+```
+git clone https://github.com/<юзернейм-аккаунта-на-гите>/5_lang_frequency
+```
+
+## 4.Как этим пользоваться...  
+*a.Данный код может быть исползован как самостоятельная программа,*  
+*при этом в качестве аргумента нужно будет указать путь до файла, текст из которого нужно будет обработать*
+
+```bash
+$ lang_frequency.py <path to file>
+самые часто повторяющиеся слова в файле text.txt
+Слово    к             встречается  4      раз(a)
+Слово    на            встречается  4      раз(a)
+Слово    в             встречается  4      раз(a)
+Слово    и             встречается  4      раз(a)
+Слово    данных        встречается  3      раз(a)
+Слово    mediawiki     встречается  3      раз(a)
+Слово    сервера       встречается  2      раз(a)
+Слово    server        встречается  2      раз(a)
+Слово    при           встречается  2      раз(a)
+Слово    компьютер     встречается  2      раз(a)
+```
+
+## 5.Какие функции могут быть переиспользованы в вашем коде
+Функция `load_data` считывает содержимое файла в одну строку  
+Функция `get_most_frequent_words` принимает на вход строку и выдаёт список кортежей  
+формата (слово,кол-во повторений в тексте)
+
+
+
+Импортировать и использовать функцию коди можно  следующим образом:  
+```python
+from lang_frequency import load_data
+from lang_frequency import get_most_frequent_words
+
+
+text_from_file = load_data(textfile_path)
+closest_bar = get_closet_bar(object_representing_json, user_defined_longitude, user_defined_latitude)
+most_frequent_words = get_most_frequent_words(text_from_file)
+```
+
+## 6. Цели
+Код создан в учебных целях. В рамках учебного курса по веб-разработке ― [DEVMAN.org](https://devman.org)
