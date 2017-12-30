@@ -28,7 +28,10 @@ def get_most_frequent_words(text_from_file):
     dict_with_words_apearances = Counter(
         decapitalized_list_of_words_from_text
     )
-    most_frequent_words = dict_with_words_apearances.most_common(10)
+    most_frequent_words_number = 10
+    most_frequent_words = dict_with_words_apearances.most_common(
+        most_frequent_words_number
+    )
     return most_frequent_words
 
 
