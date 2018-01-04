@@ -14,38 +14,48 @@ def load_data(textfile_path):
 
 
 def get_most_frequent_words(text_from_file):
-    raw_list_of_words_from_text = text_from_file.split()
+    raw_list_of_words_from_text = text_from_file.lower().split()
     list_of_words_from_text = [
         re.sub(
-            "(\W*)(\w+[-]*\w*)(\W*)",
-            r'\2',
+            "\W*(\w+-?\w*)\W*",
+            r"\g<0>",
             word
         ) for word in raw_list_of_words_from_text
     ]
-    decapitalized_list_of_words_from_text = [
-        word.lower() for word in list_of_words_from_text
-    ]
-    dict_with_words_apearances = Counter(
-        decapitalized_list_of_words_from_text
+    counter_with_words_apearances = Counter(
+        list_of_words_from_text
     )
     most_frequent_words_number = 10
-    most_frequent_words = dict_with_words_apearances.most_common(
-        most_frequent_words_number
+    most_frequent_words = dict(
+        counter_with_words_apearances.most_common(
+            most_frequent_words_number
+        )
     )
     return most_frequent_words
 
 
-def get_pretty_output(most_frequent_words):
-    for word in most_frequent_words:
+def print_pretty_output(most_frequent_words):
+    column_shift = 20
+    print("Слово {} встречается раз(a)".format(" "*column_shift))
+    for frequent_word in most_frequent_words.items():
+        word, frequency = frequent_word
+        dotted_pointer = (column_shift-len(word)+10)*"."
         print(
-            "Слово    {:10}    встречается   {:<5}  раз(a)".format(
-                word[0],
-                word[1]
+            "{:} {:} {:}".format(
+                word,
+                dotted_pointer,
+                frequency
             )
         )
 
 
 if __name__ == "__main__":
+    shell_input = sys.argv
+    if len(shell_input) < 2:
+        sys.exit(
+            "Не указан аргумент - файл."
+            "\nПерезапустите скрипт командой в формате "
+            "'python3 lang_frequency.py <path to file>'")
     textfile_path = sys.argv[1]
     if not os.path.exists(textfile_path):
         print("Такой файл не существует")
@@ -53,6 +63,9 @@ if __name__ == "__main__":
         text_from_file = load_data(textfile_path)
         most_frequent_words = get_most_frequent_words(text_from_file)
         print(
-            "самые часто повторяющиеся слова в файле {}".format(textfile_path)
+            "\nCамые часто повторяющиеся слова в файле {}\n".format(
+                textfile_path
+            )
         )
-        get_pretty_output(most_frequent_words)
+
+        print_pretty_output(most_frequent_words)
