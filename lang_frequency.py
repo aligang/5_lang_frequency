@@ -37,8 +37,7 @@ def get_most_frequent_words(text_from_file):
 def print_pretty_output(most_frequent_words):
     column_shift = 20
     print("Слово {} встречается раз(a)".format(" "*column_shift))
-    for frequent_word in most_frequent_words.items():
-        word, frequency = frequent_word
+    for word, frequency in most_frequent_words.items():
         dotted_pointer = (column_shift-len(word)+10)*"."
         print(
             "{:} {:} {:}".format(
