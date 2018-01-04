@@ -9,12 +9,12 @@ from collections import Counter
 
 def load_data(textfile_path):
     with open(textfile_path, "r") as file_contaning_text:
-        text_from_file = file_contaning_text.read()
-    return text_from_file
+        source_text = file_contaning_text.read()
+    return source_text
 
 
-def get_most_frequent_words(text_from_file):
-    decapitalized_text = text_from_file.lower()
+def get_most_frequent_words(source_text):
+    decapitalized_text = source_text.lower()
     list_of_words = re.findall("\w+-?\w*", decapitalized_text)
     counter_with_words_apearances = Counter(
         list_of_words
