@@ -14,31 +14,24 @@ def load_data(textfile_path):
 
 
 def get_most_frequent_words(text_from_file):
-    raw_list_of_words_from_text = text_from_file.lower().split()
-    list_of_words_from_text = [
-        re.sub(
-            "\W*(\w+-?\w*)\W*",
-            r"\g<0>",
-            word
-        ) for word in raw_list_of_words_from_text
-    ]
+    decapitalized_text = text_from_file.lower()
+    list_of_words = re.findall("\w+-?\w*", decapitalized_text)
     counter_with_words_apearances = Counter(
-        list_of_words_from_text
+        list_of_words
     )
     most_frequent_words_number = 10
-    most_frequent_words = dict(
-        counter_with_words_apearances.most_common(
-            most_frequent_words_number
-        )
+    most_frequent_words = counter_with_words_apearances.most_common(
+        most_frequent_words_number
     )
     return most_frequent_words
 
 
 def print_pretty_output(most_frequent_words):
-    column_shift = 20
-    print("Слово {} встречается раз(a)".format(" "*column_shift))
-    for word, frequency in most_frequent_words.items():
-        dotted_pointer = (column_shift-len(word)+10)*"."
+    column_width = 20
+    text_shift = 13
+    print("Слово {} встречается раз(a)".format(" "*column_width))
+    for word, frequency in most_frequent_words:
+        dotted_pointer = (column_width-len(word)+text_shift)*"."
         print(
             "{:} {:} {:}".format(
                 word,
@@ -59,12 +52,11 @@ if __name__ == "__main__":
     if not os.path.exists(textfile_path):
         print("Такой файл не существует")
     else:
-        text_from_file = load_data(textfile_path)
-        most_frequent_words = get_most_frequent_words(text_from_file)
+        source_text = load_data(textfile_path)
+        most_frequent_words = get_most_frequent_words(source_text)
         print(
             "\nCамые часто повторяющиеся слова в файле {}\n".format(
                 textfile_path
             )
         )
-
         print_pretty_output(most_frequent_words)
