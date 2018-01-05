@@ -14,8 +14,8 @@ def load_data(textfile_path):
 
 
 def get_most_frequent_words(source_text):
-    decapitalized_text = source_text.lower()
-    list_of_words = re.findall("\w+-?\w*", decapitalized_text)
+    lowercase_text = source_text.lower()
+    list_of_words = re.findall("\w+-?\w*", lowercase_text)
     counter_with_words_apearances = Counter(
         list_of_words
     )
@@ -42,8 +42,7 @@ def print_pretty_output(most_frequent_words):
 
 
 if __name__ == "__main__":
-    shell_input = sys.argv
-    if len(shell_input) < 2:
+    if len(sys.argv) < 2:
         sys.exit(
             "Не указан аргумент - файл."
             "\nПерезапустите скрипт командой в формате "
